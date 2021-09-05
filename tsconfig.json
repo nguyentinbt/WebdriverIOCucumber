@@ -9,16 +9,14 @@
         "strictPropertyInitialization": false,
         "strictNullChecks": true,
         "baseUrl": ".",
+        "resolveJsonModule": true,
         "types": [
             "node",
             "webdriverio/async",
-            "@wdio/cucumber-framework"
+            "@wdio/cucumber-framework",
+            "expect-webdriverio"
         ]
     },
-    "include": [
-        "./test/**/*.ts",
-        "src/pages/login.page.ts"
-    ],
     "exclude": [
         "node_modules",
     ]
