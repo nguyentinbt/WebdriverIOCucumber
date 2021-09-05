@@ -8,6 +8,7 @@
         "noImplicitAny": false,
         "strictPropertyInitialization": false,
         "strictNullChecks": true,
+        "baseUrl": ".",
         "types": [
             "node",
             "webdriverio/async",
@@ -15,7 +16,8 @@
         ]
     },
     "include": [
-        "./test/**/*.ts"
+        "./test/**/*.ts",
+        "src/pages/login.page.ts"
     ],
     "exclude": [
         "node_modules",
