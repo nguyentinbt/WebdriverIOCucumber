@@ -181,7 +181,7 @@ export const config: WebdriverIO.Config = {
     // see also: https://webdriver.io/docs/dot-reporter
     //reporters: ['spec'],
     // ...
-    reporters: [['allure', {
+    reporters: ['spec', ['allure', {
         outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: false,
