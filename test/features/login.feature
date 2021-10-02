@@ -1,13 +1,12 @@
-Feature: The Internet Guinea Pig Website
+Feature: Login
 
-  Scenario Outline: As a user, I can log into the secure area
+  Scenario Outline: As a user, I can log into Amazon.com with valid cridential
 
     Given I am on the login page
-    When I login with username and password
-    Then I should see a flash message saying <message>
+    When I login with <username> and <password>
+    Then I should see <welcomeText> on the header
 
+    Examples:
+      | username                 | password   | welcomeText |
+      | nguyentin.cnpm@gmail.com | Tin@123456 | Hello, Tin  |
 
-# Examples:
-#   | username | password             | message                        |
-#   | tomsmith | SuperSecretPassword! | You logged into a secure area! |
-#   | foobar   | barfoo               | Your username is invalid!      |

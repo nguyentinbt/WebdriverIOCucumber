@@ -61,7 +61,7 @@ export const config: WebdriverIO.Config = {
     // will be called from there.
     //
     specs: [
-        './test/features/**/*.feature'
+        './test/features/**/search.feature'
     ],
     // Patterns to exclude.
     exclude: [
@@ -96,7 +96,7 @@ export const config: WebdriverIO.Config = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 5,
+        maxInstances: 2,
         //
         browserName: 'chrome',
         'goog:chromeOptions': {
@@ -293,6 +293,11 @@ export const config: WebdriverIO.Config = {
      */
     // before: function (capabilities, specs) {
     // },
+    before: function (capabilities, specs) {
+        console.log('Start Feature');
+        browser.maximizeWindow();
+        require('expect-webdriverio').setOptions({ wait: 5000 });
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
@@ -345,8 +350,9 @@ export const config: WebdriverIO.Config = {
      * @param {string}                 result.error    error stack if scenario failed
      * @param {number}                 result.duration duration of scenario in milliseconds
      */
-    // afterScenario: function (world, result) {
-    // },
+    afterScenario: function (world, result) {
+        browser.deleteAllCookies();
+    },
     /**
      *
      * Runs after a Cucumber Feature.
