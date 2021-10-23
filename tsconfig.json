@@ -3,11 +3,12 @@
         "outDir": "./.tsbuild/",
         "sourceMap": false,
         "target": "es2019",
+        "esModuleInterop": true,
         "module": "commonjs",
         "removeComments": true,
         "noImplicitAny": false,
         "strictPropertyInitialization": false,
-        "strictNullChecks": true,
+        "strictNullChecks": false,
         "baseUrl": ".",
         "resolveJsonModule": true,
         "types": [

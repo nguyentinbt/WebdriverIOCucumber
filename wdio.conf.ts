@@ -2,6 +2,35 @@
 import * as path from 'path';
 const allure = require('allure-commandline');
 
+//Control browser driver installation/running separately.
+const drivers = {
+    chrome: { version: 'latest' }, // https://chromedriver.chromium.org/
+    // chrome: { version: '91.0.4472.101' }, // https://chromedriver.chromium.org/
+    // firefox: { version: '0.29.1' }, // https://github.com/mozilla/geckodriver/releases
+    // chromiumedge: { version: '85.0.564.70' } // https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
+}
+
+const urls = {
+    test: '',
+    development: '',
+    staging: '',
+    production:''
+};
+
+const ENV = process.env.ENV;
+//let apppBaseURL: string;
+
+// if (ENV == 'test') {
+//     console.log(`RUNNING THE TEST IN ${urls[ENV]}`);
+//     apppBaseURL = urls.test;
+// } else if (ENV == 'development') {
+//     console.log(`RUNNING THE TEST IN ${urls[ENV]}`);
+//     apppBaseURL = urls.development;
+// } else {
+//     console.log(`ENV is not available!`);
+//     process.exit();
+// }
+
 export const config: WebdriverIO.Config = {
     //
     // ====================
@@ -26,7 +55,6 @@ export const config: WebdriverIO.Config = {
         //     baseUrl: './'
         // }
     },
-
 
     // ==================================
     // Where should your test be launched
@@ -98,7 +126,7 @@ export const config: WebdriverIO.Config = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 2,
+        maxInstances: 1,
         //
         browserName: 'chrome',
         'goog:chromeOptions': {
@@ -167,8 +195,21 @@ export const config: WebdriverIO.Config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver'],
-
+    //services: ['chromedriver'],
+    services: [
+        ['selenium-standalone', {
+            logPath: 'logs',
+            installArgs: { drivers }, // drivers to install
+            args: { 
+                drivers
+                    // < For using port
+                    // version: "3.141.59",
+                    // seleniumArgs: ['-host', '127.0.0.1','-port', '5555']
+                    // For using port />
+             } // drivers to use
+        }]
+    ],
+    
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
