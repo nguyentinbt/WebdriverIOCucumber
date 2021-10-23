@@ -1,4 +1,4 @@
-import page from "./page"
+import page from "../page";
 
 // Selectors
 const searchResult = '[data-component-type="s-search-result"]'

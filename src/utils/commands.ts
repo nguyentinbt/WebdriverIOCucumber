@@ -1,8 +1,8 @@
 import { ChainablePromiseArray, ChainablePromiseElement } from "webdriverio";
 
 export const setText = async (element: ChainablePromiseElement<Promise<WebdriverIO.Element>>, value: string) => {
-
     if (await element.isDisplayed() === true) {
+        await element.scrollIntoView();
         await element.setValue(value);
     } else {
         try {

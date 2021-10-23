@@ -1,3 +1,5 @@
+//import { DEFAULT_DOWNLOAD_PATH } from 'src/utils/constants';
+import * as path from 'path';
 const allure = require('allure-commandline');
 
 export const config: WebdriverIO.Config = {
@@ -61,7 +63,7 @@ export const config: WebdriverIO.Config = {
     // will be called from there.
     //
     specs: [
-        './test/features/**/search.feature'
+        './test/features/**/ChallengingDOM.feature'
     ],
     // Patterns to exclude.
     exclude: [
@@ -100,9 +102,17 @@ export const config: WebdriverIO.Config = {
         //
         browserName: 'chrome',
         'goog:chromeOptions': {
-            // to run chrome headless the following flags are required
-            // (see https://developers.google.com/web/updates/2017/04/headless-chrome)
-            // args: ['--headless', '--disable-gpu'],
+            prefs: {
+                'prompt_for_download': false,
+                'directory_upgrade': true,
+                'download.default_directory': path.join(__dirname, '../assets/downloads')
+            },
+            args: [
+                // '--headless',
+                '--no-sandbox',
+                '--disable-dev-shm-usage',
+                '--window-size=1920,1080',
+            ]
         },
         acceptInsecureCerts: true
         // If outputDir is provided WebdriverIO can capture driver session logs
@@ -209,11 +219,11 @@ export const config: WebdriverIO.Config = {
         })
     },
 
-    afterStep: function (test, scenario, { error, duration, passed }) {
-        if (error) {
-            browser.takeScreenshot();
-        }
-    },
+    // afterStep: function (test, scenario, { error, duration, passed }) {
+    //     if (error) {
+    //         browser.takeScreenshot();
+    //     }
+    // },
 
     // ...
 
@@ -222,7 +232,10 @@ export const config: WebdriverIO.Config = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./test/steps/*.ts'],
+        require: [
+            './test/steps/**/*.ts',
+            './test/steps/*.ts'
+        ],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)

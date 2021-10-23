@@ -1,4 +1,4 @@
-import page from "./page"
+import page from "../page"
 import { setText } from "src/utils/commands"
 
 // Selectors

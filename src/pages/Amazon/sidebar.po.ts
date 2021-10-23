@@ -1,6 +1,4 @@
-import page from "./page"
-import { clickElement, getElementText, selectDropdown, setText } from "src/utils/commands"
-import { ChainablePromiseArray, ChainablePromiseElement, ElementArray } from "webdriverio";
+import page from "../page"
 import { UIElement } from "src/utils/uielement";
 
 // Selectors
